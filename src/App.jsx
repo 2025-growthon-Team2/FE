@@ -1,12 +1,27 @@
+import { Routes, Route } from "react-router-dom";
+
 import styled from "styled-components";
 import "./css/App.css";
+import Start from "./pages/Start";
 import Main from "./pages/Main";
+import Home from "./pages/Home";
+import Matching from "./pages/Matching";
+import Alarm from "./pages/Alarm";
+import MyPage from "./pages/MyPage";
 
 function App() {
     return (
         <AppContainer>
             <Wrapper>
-                <Main />
+                <Routes>
+                    <Route path="/" element={<Start />} />
+                    <Route element={<Main />}>
+                        <Route path="/home" element={<Home />} />
+                        <Route path="/matching" element={<Matching />} />
+                        <Route path="/alarm" element={<Alarm />} />
+                        <Route path="/mypage" element={<MyPage />} />
+                    </Route>
+                </Routes>
             </Wrapper>
         </AppContainer>
     );

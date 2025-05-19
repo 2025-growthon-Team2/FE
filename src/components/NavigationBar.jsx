@@ -1,47 +1,64 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HomeIcon from "../image/home.svg";
 import MatchingIcon from "../image/matching.svg";
 import AlarmIcon from "../image/alarm.svg";
 import MyIcon from "../image/my.svg";
 
-function Item({ icon, children, onClick, isActive }) {
+function Item({ children, page, icon, changeCurrentPage, currentPage }) {
+    const navigate = useNavigate();
     return (
-        <ItemWrapper onClick={onClick} $isActive={isActive}>
+        <ItemWrapper
+            onClick={() => {
+                changeCurrentPage(page);
+                navigate("/" + page);
+            }}
+            $active={currentPage === page}>
             <span>
-                <img src={icon} alt={icon} />
+                <img src={icon} alt={page} />
             </span>
             <span>{children}</span>
         </ItemWrapper>
     );
 }
 
-function NavigationBar({ onNavigate, currentPage }) {
+function NavigationBar({ currentPage, changeCurrentPage }) {
+    const pages = [
+        {
+            page: "home",
+            icon: HomeIcon,
+            itemName: "홈",
+        },
+        {
+            page: "matching",
+            icon: MatchingIcon,
+            itemName: "매칭",
+        },
+        {
+            page: "alarm",
+            icon: AlarmIcon,
+            itemName: "알림",
+        },
+        {
+            page: "mypage",
+            icon: MyIcon,
+            itemName: "마이페이지",
+        },
+    ];
     return (
         <NavigationBarWrapper>
-            <Item
-                icon={HomeIcon}
-                onClick={() => onNavigate("home")}
-                isActive={currentPage === "home"}>
-                홈
-            </Item>
-            <Item
-                icon={MatchingIcon}
-                onClick={() => onNavigate("matching")}
-                isActive={currentPage === "matching"}>
-                매칭
-            </Item>
-            <Item
-                icon={AlarmIcon}
-                onClick={() => onNavigate("alarm")}
-                isActive={currentPage === "alarm"}>
-                알림
-            </Item>
-            <Item
-                icon={MyIcon}
-                onClick={() => onNavigate("mypage")}
-                isActive={currentPage === "mypage"}>
-                마이페이지
-            </Item>
+            {pages.map((page) => {
+                return (
+                    <Item
+                        key={page.page}
+                        page={page.page}
+                        icon={page.icon}
+                        changeCurrentPage={changeCurrentPage}
+                        currentPage={currentPage}>
+                        {page.itemName}
+                    </Item>
+                );
+            })}
         </NavigationBarWrapper>
     );
 }
@@ -49,7 +66,7 @@ function NavigationBar({ onNavigate, currentPage }) {
 const NavigationBarWrapper = styled.nav`
     display: flex;
     justify-content: space-between;
-    padding: 13px 50px;
+    padding: 14px 51px 16px 51px;
     width: 393px;
     border-top: 1px solid #ececec;
     position: fixed;
@@ -69,14 +86,14 @@ const ItemWrapper = styled.div`
         height: 24px;
         img {
             filter: ${(props) =>
-                props.$isActive
+                props.$active
                     ? "brightness(0) saturate(100%) invert(31%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(92%) contrast(87%)"
                     : "none"};
         }
     }
     span:last-child {
         font-size: 8px;
-        margin-top: 9px;
+        margin-top: 5px;
     }
 `;
 

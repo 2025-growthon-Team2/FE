@@ -1,20 +1,21 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Content from "../components/Content";
 import NavigationBar from "../components/NavigationBar";
+import { Outlet, useLocation } from "react-router-dom";
 
 function MainPage() {
-    const [currentPage, setCurrentPage] = useState("home");
+    const location = useLocation();
+    const [currentPage, setCurrentPage] = useState(location.pathname.substring(1));
 
-    const handleNavigation = (page) => {
+    const changeCurrentPage = (page) => {
         setCurrentPage(page);
     };
 
     return (
         <MainPageWrapper>
-            <Content currentPage={currentPage} />
+            <Outlet />
             <NavigationBar
-                onNavigate={handleNavigation}
+                changeCurrentPage={changeCurrentPage}
                 currentPage={currentPage}
             />
         </MainPageWrapper>
