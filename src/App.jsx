@@ -2,24 +2,32 @@ import { Routes, Route } from "react-router-dom";
 
 import styled from "styled-components";
 import "./css/App.css";
-import Start from "./pages/Start";
+
 import Main from "./pages/Main";
 import Home from "./pages/Home";
 import Matching from "./pages/Matching";
 import Alarm from "./pages/Alarm";
 import MyPage from "./pages/MyPage";
+import EduRegister from "./pages/EduRegister";
+import EduRegisterConfirm from "./pages/EduRegisterConfirm";
 
 function App() {
     return (
         <AppContainer>
             <Wrapper>
                 <Routes>
-                    <Route path="/" element={<Start />} />
                     <Route element={<Main />}>
-                        <Route path="/home" element={<Home />} />
-                        <Route path="/matching" element={<Matching />} />
-                        <Route path="/alarm" element={<Alarm />} />
-                        <Route path="/mypage" element={<MyPage />} />
+                        <Route path="home" element={<Home />} />
+                        <Route path="matching" element={<Matching />} />
+                        <Route path="alarm" element={<Alarm />} />
+                        <Route path="mypage" element={<MyPage />} />
+                        <Route path="edu/register">
+                            <Route index element={<EduRegister />} />
+                            <Route
+                                path="confirm"
+                                element={<EduRegisterConfirm />}
+                            />
+                        </Route>
                     </Route>
                 </Routes>
             </Wrapper>

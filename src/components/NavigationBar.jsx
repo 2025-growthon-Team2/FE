@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import HomeIcon from "../image/home.svg";
 import MatchingIcon from "../image/matching.svg";
@@ -6,19 +6,20 @@ import AlarmIcon from "../image/alarm.svg";
 import MyIcon from "../image/my.svg";
 
 function Item({ children, page, icon, changeCurrentPage, currentPage }) {
-    const navigate = useNavigate();
     return (
-        <ItemWrapper
-            onClick={() => {
-                changeCurrentPage(page);
-                navigate("/" + page);
-            }}
-            $active={currentPage === page}>
-            <span>
-                <img src={icon} alt={page} />
-            </span>
-            <span>{children}</span>
-        </ItemWrapper>
+        <Link to={"/" + page}>
+            <ItemWrapper
+                onClick={() => {
+                    changeCurrentPage(page);
+                    // navigate("/" + page);
+                }}
+                $active={currentPage === page}>
+                <span>
+                    <img src={icon} alt={page} />
+                </span>
+                <span>{children}</span>
+            </ItemWrapper>
+        </Link>
     );
 }
 
