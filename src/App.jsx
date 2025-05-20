@@ -2,9 +2,10 @@ import { Routes, Route } from "react-router-dom";
 
 import styled from "styled-components";
 import "./css/App.css";
-import Start from "./pages/Start"
+import Start from "./pages/Start";
 import Main from "./pages/Main";
 import Home from "./pages/Home";
+import EducationApplyDetail from "./pages/EducationApplyDetail";
 import Matching from "./pages/Matching";
 import Alarm from "./pages/Alarm";
 import MyPage from "./pages/MyPage";
@@ -12,41 +13,39 @@ import EduRegister from "./pages/EduRegister";
 import EduRegisterConfirm from "./pages/EduRegisterConfirm";
 
 function App() {
-    return (
-        <AppContainer>
-            <Wrapper>
-                <Routes>
-                    <Route index element={<Start />} />
-                    <Route element={<Main />}>
-                        <Route path="home" element={<Home />} />
-                        <Route path="matching" element={<Matching />} />
-                        <Route path="alarm" element={<Alarm />} />
-                        <Route path="mypage" element={<MyPage />} />
-                        <Route path="edu/register">
-                            <Route index element={<EduRegister />} />
-                            <Route
-                                path="confirm"
-                                element={<EduRegisterConfirm />}
-                            />
-                        </Route>
-                    </Route>
-                </Routes>
-            </Wrapper>
-        </AppContainer>
-    );
+  return (
+    <AppContainer>
+      <Wrapper>
+        <Routes>
+          <Route index element={<Start />} />
+          <Route element={<Main />}>
+            <Route path="home" element={<Home />} />
+            <Route path="matching" element={<Matching />} />
+            <Route path="alarm" element={<Alarm />} />
+            <Route path="mypage" element={<MyPage />} />
+            <Route path="edu/apply/:id" element={<EducationApplyDetail />} />
+            <Route path="edu/register">
+              <Route index element={<EduRegister />} />
+              <Route path="confirm" element={<EduRegisterConfirm />} />
+            </Route>
+          </Route>
+        </Routes>
+      </Wrapper>
+    </AppContainer>
+  );
 }
 
 const AppContainer = styled.div`
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
 `;
 
 const Wrapper = styled.div`
-    width: 393px;
-    position: relative;
-    height: 100%;
+  width: 393px;
+  position: relative;
+  height: 100%;
 `;
 
 export default App;
