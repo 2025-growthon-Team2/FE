@@ -2,7 +2,10 @@ import { Routes, Route } from "react-router-dom";
 
 import styled from "styled-components";
 import "./css/App.css";
-import Start from "./pages/Start"
+import Start from "./pages/Start";
+import Role from "./pages/Role";
+import EmailVerification from "./pages/EmailVerification";
+import VerificationSuccess from "./pages/VerificationSuccess";
 import Main from "./pages/Main";
 import Home from "./pages/Home";
 import Matching from "./pages/Matching";
@@ -17,6 +20,9 @@ function App() {
             <Wrapper>
                 <Routes>
                     <Route index element={<Start />} />
+                    <Route path="role" element={<Role />} />
+                    <Route path="email-verification" element={<EmailVerification />} />
+                    <Route path="verification-success" element={<VerificationSuccess />} />
                     <Route element={<Main />}>
                         <Route path="home" element={<Home />} />
                         <Route path="matching" element={<Matching />} />
