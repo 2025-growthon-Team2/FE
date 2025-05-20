@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import styled from "styled-components";
 import "./css/App.css";
-
+import Start from "./pages/Start"
 import Main from "./pages/Main";
 import Home from "./pages/Home";
 import Matching from "./pages/Matching";
@@ -16,6 +16,7 @@ function App() {
         <AppContainer>
             <Wrapper>
                 <Routes>
+                    <Route index element={<Start />} />
                     <Route element={<Main />}>
                         <Route path="home" element={<Home />} />
                         <Route path="matching" element={<Matching />} />
