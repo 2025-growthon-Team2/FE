@@ -1,8 +1,15 @@
 import styled from "styled-components";
 import userImg from "../image/userImg.png";
 import applyUsers from "../image/ApplyUsers.png";
+import { useNavigate } from "react-router-dom";
 
 function EduInfoCard() {
+  const navigate = useNavigate({ id });
+
+  const handleClick = () => {
+    navigate(`/edu/matching/${id}`);
+  };
+
   return (
     <EduBox>
       <EduProfile>
@@ -28,7 +35,7 @@ function EduInfoCard() {
           <EduTimeDes>{"2025년 6월 3일(화) 오후 3시 이후"}</EduTimeDes>
         </EduTime>
       </EduDes>
-      <ApplyList>
+      <ApplyList onClick={handleClick}>
         <ApplyUsers src={applyUsers}></ApplyUsers>
         <ApplyUsersNum>+4</ApplyUsersNum>
       </ApplyList>

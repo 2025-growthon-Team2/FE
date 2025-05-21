@@ -29,7 +29,6 @@ function Home() {
         <H.Logo>logo</H.Logo>
         <H.Alarm src={alarmIcon}></H.Alarm>
       </H.Header>
-      신청자 기준 페이지
       <H.Welcome>{"유저님, 오늘도 좋은 배움이\n기다리고 있어요 :)"}</H.Welcome>
       <H.EduSearch>
         <H.SearchButton></H.SearchButton>
@@ -64,8 +63,8 @@ function Home() {
       {/*기부자 기준 페이지
       <H.Welcome>{"어서오세요 :)\n박민재 재능기부자님!"}</H.Welcome>
       <H.EduInfos>
-        <EduInfoCard></EduInfoCard>
-        <EduInfoCard></EduInfoCard>
+        <EduInfoCard id={1}></EduInfoCard>
+        <EduInfoCard id={2}></EduInfoCard>
       </H.EduInfos>*/}
     </H.PageWrapper>
   );
