@@ -1,36 +1,61 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
+import Button from "../components/Button";
+import EmailAuth from "../components/EmailAuth";
+import ErrorMessage from "../components/ErrorMessage";
 
 function EmailVerification() {
+    const {
+        tempRole,
+        setTempRole,
+        moveNextPage,
+        emailAuthRef,
+        check,
+        isRequestEmail,
+    } = useOutletContext();
+    const [inputValue, setInputValue] = useState("");
+
+    useEffect(() => {
+        // LocalStorage에서 역할 정보 가져오기
+        const savedRole = localStorage.getItem("tempRole");
+        setTempRole(savedRole);
+
+        const checkInputValue = () => {
+            if (emailAuthRef.current) {
+                setInputValue(emailAuthRef.current.value);
+            }
+        };
+
+        const inputElement = emailAuthRef.current;
+        if (inputElement) {
+            inputElement.addEventListener("input", checkInputValue);
+        }
+
+        checkInputValue();
+
+        return () => {
+            if (inputElement) {
+                inputElement.removeEventListener("input", checkInputValue);
+            }
+        };
+    }, []);
+    
     return (
-        <StartPageWrapper>
-            <LoginButton to="/verification-success">
-                <img
-                    src="src/image/kakao_logo.png"
-                    alt="kakao"
-                    width="40"
-                    height="40"
+        <>
+            {tempRole === "giver" && (
+                <EmailAuth
+                    emailAuthRef={emailAuthRef}
+                    isRequestEmail={isRequestEmail}
                 />
-                <span>카카오로 시작하기</span>
-            </LoginButton>
-        </StartPageWrapper>
+            )}
+            {tempRole === "giver" && <ErrorMessage isRequestEmail={isRequestEmail} check={check} />}
+            <Button
+                isDisabled={tempRole === "giver" && !inputValue}
+                onClick={moveNextPage}>
+                확인
+            </Button>
+        </>
     );
 }
-
-const StartPageWrapper = styled.div`
-    padding: 20px 16px;
-`;
-
-const LoginButton = styled(Link)`
-    display: flex;
-    align-items: center;
-    padding: 10px 105px;
-    margin-top: 18px;
-    border-radius: 10px;
-    background: #fddc3f;
-    font-size: 16px;
-    width: 100%;
-    white-space: nowrap;
-`;
 
 export default EmailVerification;
