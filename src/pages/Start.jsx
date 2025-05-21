@@ -24,7 +24,7 @@ function StartPage() {
                 <Title>믿고 나눌 수 있는 따뜻한 연결,</Title>
                 <Title>'같이잇다'와 함께 만들어가요</Title>
             </TitleBox>
-            <LoginButton to="/home">
+            <LoginButton to="/role">
                 <img
                     src="src/image/kakao_logo.png"
                     alt="kakao"

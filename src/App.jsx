@@ -3,6 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import "./css/App.css";
 import Start from "./pages/Start";
+import RoleSelection from "./pages/RoleSelection";
+import Role from "./pages/Role";
+import EmailVerification from "./pages/EmailVerification";
+import VerificationSuccess from "./pages/VerificationSuccess";
 import Main from "./pages/Main";
 import Home from "./pages/Home";
 import EducationApplyDetail from "./pages/EducationApplyDetail";
@@ -13,39 +17,56 @@ import EduRegister from "./pages/EduRegister";
 import EduRegisterConfirm from "./pages/EduRegisterConfirm";
 
 function App() {
-  return (
-    <AppContainer>
-      <Wrapper>
-        <Routes>
-          <Route index element={<Start />} />
-          <Route element={<Main />}>
-            <Route path="home" element={<Home />} />
-            <Route path="matching" element={<Matching />} />
-            <Route path="alarm" element={<Alarm />} />
-            <Route path="mypage" element={<MyPage />} />
-            <Route path="edu/apply/:id" element={<EducationApplyDetail />} />
-            <Route path="edu/register">
-              <Route index element={<EduRegister />} />
-              <Route path="confirm" element={<EduRegisterConfirm />} />
-            </Route>
-          </Route>
-        </Routes>
-      </Wrapper>
-    </AppContainer>
-  );
+    return (
+        <AppContainer>
+            <Wrapper>
+                <Routes>
+                    <Route index element={<Start />} />
+                    <Route element={<RoleSelection />}>
+                        <Route path="role" element={<Role />} />
+                        <Route
+                            path="email-verification"
+                            element={<EmailVerification />}
+                        />
+                        <Route
+                            path="verification-success"
+                            element={<VerificationSuccess />}
+                        />
+                    </Route>
+                    <Route element={<Main />}>
+                        <Route path="home" element={<Home />} />
+                        <Route path="matching" element={<Matching />} />
+                        <Route path="alarm" element={<Alarm />} />
+                        <Route path="mypage" element={<MyPage />} />
+                        <Route
+                            path="edu/apply/:id"
+                            element={<EducationApplyDetail />}
+                        />
+                        <Route path="edu/register">
+                            <Route index element={<EduRegister />} />
+                            <Route
+                                path="confirm"
+                                element={<EduRegisterConfirm />}
+                            />
+                        </Route>
+                    </Route>
+                </Routes>
+            </Wrapper>
+        </AppContainer>
+    );
 }
 
 const AppContainer = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
 `;
 
 const Wrapper = styled.div`
-  width: 393px;
-  position: relative;
-  height: 100%;
+    width: 393px;
+    position: relative;
+    height: 100%;
 `;
 
 export default App;
