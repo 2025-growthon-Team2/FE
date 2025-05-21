@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import Header from "../components/Header";
 import NavigationBar from "../components/NavigationBar";
 import { Outlet, useLocation } from "react-router-dom";
 
@@ -26,6 +27,7 @@ function MainPage() {
 
     return (
         <MainPageWrapper>
+            <Header />
             <Outlet context={{ userInfo, auth }} />
             <NavigationBar
                 changeCurrentPage={changeCurrentPage}
