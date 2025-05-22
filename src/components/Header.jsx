@@ -1,117 +1,122 @@
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import BackIcon from "../image/back.png";
-import HeaderAlarm from "../image/header_alarm.png";
+import MyIcon from "../image/goToMy.png";
 
 const checkAvailBackBtn = (pathname) => {
-    return !(
-        pathname === "/home" ||
-        pathname === "/matching" ||
-        pathname === "/alarm" ||
-        pathname === "/mypage"
-    );
+  return !(
+    pathname === "/home" ||
+    pathname === "/matching" ||
+    pathname === "/alarm" ||
+    pathname === "/mypage"
+  );
 };
 
 const checkAvailPageName = (pathname) => {
-    const whiteList = [
-        {
-            path: "/mypage",
-            name: "프로필",
-        },
-        { path: "/edu/apply", name: "학습 신청" },
-        { path: "/edu/register", name: "교육 정보 등록하기" },
-        { path: "/edu/matching", name: "신청자 목록" },
-    ];
-    let name = "";
-    whiteList.map((item) => {
-        if (pathname.indexOf(item.path) !== -1) name = item.name;
-    });
-    return name;
+  const whiteList = [
+    {
+      path: "/mypage",
+      name: "프로필",
+    },
+    { path: "/edu/apply", name: "학습 신청" },
+    { path: "/edu/register", name: "교육 정보 등록하기" },
+    { path: "/edu/matching", name: "신청자 목록" },
+  ];
+  let name = "";
+  whiteList.map((item) => {
+    if (pathname.indexOf(item.path) !== -1) name = item.name;
+  });
+  return name;
 };
 
 const checkAvailLogo = (pathname) => {
-    return pathname === "/home";
+  return pathname === "/home";
 };
 
 function Header({ moveBack }) {
-    const { pathname } = useLocation();
-    const isAvailBackBtn = checkAvailBackBtn(pathname);
-    const pageName = checkAvailPageName(pathname);
-    const isAvailLogo = checkAvailLogo(pathname);
-    return (
-        <HeaderWrapper pathname={pathname}>
-            <HeaderDivider>
-                {isAvailBackBtn && (
-                    <BackButton onClick={moveBack}>
-                        <BackImage src={BackIcon} alt="back" />
-                    </BackButton>
-                )}
-                {isAvailLogo && <Logo>logo</Logo>}
-                {pageName && <PageName>{pageName}</PageName>}
-            </HeaderDivider>
-            <HeaderDivider></HeaderDivider>
-            <HeaderDivider>
-                {isAvailLogo && (
-                    <Alarm>
-                        <HeaderAlarmImg src={HeaderAlarm} alt="alarm" />
-                        
-                    </Alarm>
-                )}
-            </HeaderDivider>
-        </HeaderWrapper>
-    );
+  const { pathname } = useLocation();
+  const isAvailBackBtn = checkAvailBackBtn(pathname);
+  const pageName = checkAvailPageName(pathname);
+  const isAvailLogo = checkAvailLogo(pathname);
+  const navigate = useNavigate();
+
+  return (
+    <HeaderWrapper pathname={pathname}>
+      <HeaderDivider>
+        {isAvailBackBtn && (
+          <BackButton onClick={moveBack}>
+            <BackImage src={BackIcon} alt="back" />
+          </BackButton>
+        )}
+        {isAvailLogo && <Logo>logo</Logo>}
+        {pageName && <PageName>{pageName}</PageName>}
+      </HeaderDivider>
+      <HeaderDivider></HeaderDivider>
+      <HeaderDivider>
+        {isAvailLogo && (
+          <GoToMy>
+            <HeaderMyImg
+              src={MyIcon}
+              alt="alarm"
+              onClick={() => navigate("/mypage")}
+            />
+          </GoToMy>
+        )}
+      </HeaderDivider>
+    </HeaderWrapper>
+  );
 }
 
 const HeaderWrapper = styled.header`
-    display: flex;
-    height: ${({ pathname }) => {
-        return pathname.indexOf("edu") !== -1 ? "64px" : "40px";
-    }};
-    align-items: center;
-    margin-top: 10px;
-    padding: 0 20px;
-    width: 100%;
+  display: flex;
+  height: ${({ pathname }) => {
+    return pathname.indexOf("edu") !== -1 ? "64px" : "40px";
+  }};
+  align-items: center;
+  margin-top: 10px;
+  padding: 0 20px;
+  width: 100%;
 `;
 
 const BackButton = styled.button`
-    background: none;
-    border: none;
-    margin-right: 28px;
+  background: none;
+  border: none;
+  margin-right: 28px;
 `;
 
 const PageName = styled.h1`
-    font-size: 20px;
-    font-weight: 500;
-    white-space: nowrap;
+  font-size: 20px;
+  font-weight: 500;
+  white-space: nowrap;
 `;
 
 const Logo = styled.div`
-    background-color: rebeccapurple;
-    width: 31px;
-    height: 19px;
+  background-color: rebeccapurple;
+  width: 31px;
+  height: 19px;
 `;
 
 const HeaderDivider = styled.div`
-    width: 33.33%;
-    display: flex;
-    &:last-child {
-        justify-content: flex-end;
-    }
+  width: 33.33%;
+  display: flex;
+  &:last-child {
+    justify-content: flex-end;
+  }
 `;
 
-const Alarm = styled.div`
-    width: 24px;
-    height: 24px;
+const GoToMy = styled.div`
+  height: 18px;
+  width: 17px;
 `;
 
-const HeaderAlarmImg = styled.img`
-    width: 24px;
-    height: 26px;
-`
+const HeaderMyImg = styled.img`
+  height: 18px;
+  width: 17px;
+`;
 
 const BackImage = styled.img`
-    width: 10px;
-    height: 20px;
+  width: 10px;
+  height: 20px;
 `;
 
 export default Header;

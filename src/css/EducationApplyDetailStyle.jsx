@@ -100,11 +100,9 @@ export const VolInfo = styled.div`
 `;
 
 export const InfoName = styled.div`
-  font-weight: 600;
+  font-weight: 800;
   margin-right: 5px;
 `;
-
-export const InfoUniv = styled.div``;
 
 export const EduTime = styled.div`
   font-size: 12px;
