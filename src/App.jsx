@@ -10,8 +10,6 @@ import Main from "./pages/Main";
 import Home from "./pages/Home";
 import EducationApplyDetail from "./pages/EducationApplyDetail";
 import MatchingList from "./pages/MatchingList";
-import Matching from "./pages/Matching";
-import Alarm from "./pages/Alarm";
 import MyPage from "./pages/MyPage";
 import EduRegister from "./pages/EduRegister";
 import NotFound from "./pages/NotFound";
@@ -48,30 +46,27 @@ function App() {
                             element={<EducationApplyDetail />}
                         />
 
-                        <Route
-                            path="edu/matching/:id"
-                            element={<MatchingList />}
-                        />
-                        <Route path="edu/register" element={<EduRegister />} />
-                    </Route>
-                    <Route path="*" element={<NotFound />} />
-                </Routes>
-            </Wrapper>
-        </AppContainer>
-    );
+            <Route path="edu/matching/:id" element={<MatchingList />} />
+            <Route path="edu/register" element={<EduRegister />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Wrapper>
+    </AppContainer>
+  );
 }
 
 const AppContainer = styled.div`
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
 `;
 
 const Wrapper = styled.div`
-    width: 393px;
-    position: relative;
-    height: 100%;
+  width: 393px;
+  position: relative;
+  height: 100%;
 `;
 
 export default App;

@@ -24,7 +24,7 @@ function EducationApplyCard({ id }) {
           <EduSubtitle>
             {"파이썬의 설치부터 간단한 프로그램 만들어보기까지:)"}
           </EduSubtitle>
-          <EduDonator>이민수 서울과학기술대학교 컴퓨터공학과 4학년</EduDonator>
+          <EduDonator>이민수</EduDonator>
         </EduMid>
         <EduBottom>{"2025년 6월 10일(화) 오후 5시 이후"}</EduBottom>
       </EduDes>

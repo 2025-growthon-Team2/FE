@@ -1,8 +1,6 @@
 import * as D from "../css/EducationApplyDetailStyle";
 
 function EducationDetail() {
-  
-
   return (
     <D.PageWrapper>
       <D.Tags>
@@ -13,7 +11,6 @@ function EducationDetail() {
       <D.SubTitle>과목별 효율적인 공부법과 시간 관리 방법</D.SubTitle>
       <D.VolInfo>
         <D.InfoName>김지연</D.InfoName>
-        <D.InfoUniv>| 한양대학교 교육학과 3학년</D.InfoUniv>
       </D.VolInfo>
       <D.EduTime>
         <D.EduTimeTitle>교육 시간</D.EduTimeTitle>
