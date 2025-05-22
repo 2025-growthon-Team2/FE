@@ -12,12 +12,9 @@ function MainPage() {
         field: "IT",
         subfield: "네트워크",
         id: "parkvudghk@naver.com",
-        school: {
-            info: "인하공업전문대학 컴퓨터정보공학과(심화) 1학년",
-            email: "ebebebe@itc.ac.kr",
-        },
+        email: "ebebebe@itc.ac.kr",
     };
-    const auth = "learner";
+    const auth = "giver";
     const [currentPage, setCurrentPage] = useState(
         location.pathname.substring(1)
     );

@@ -14,6 +14,7 @@ import Matching from "./pages/Matching";
 import Alarm from "./pages/Alarm";
 import MyPage from "./pages/MyPage";
 import EduRegister from "./pages/EduRegister";
+import NotFound from "./pages/NotFound";
 
 function App() {
     return (
@@ -48,6 +49,7 @@ function App() {
                         />
                         <Route path="edu/register" element={<EduRegister />} />
                     </Route>
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </Wrapper>
         </AppContainer>
