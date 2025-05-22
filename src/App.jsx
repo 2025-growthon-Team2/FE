@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-
 import styled from "styled-components";
 import "./css/App.css";
 import Start from "./pages/Start";
@@ -15,7 +14,6 @@ import Matching from "./pages/Matching";
 import Alarm from "./pages/Alarm";
 import MyPage from "./pages/MyPage";
 import EduRegister from "./pages/EduRegister";
-import EduRegisterConfirm from "./pages/EduRegisterConfirm";
 
 function App() {
     return (
@@ -49,10 +47,6 @@ function App() {
                             element={<MatchingList />}
                         />
                         <Route path="edu/register" element={<EduRegister />} />
-                        <Route
-                            path="edu/upload"
-                            element={<EduRegisterConfirm />}
-                        />
                     </Route>
                 </Routes>
             </Wrapper>

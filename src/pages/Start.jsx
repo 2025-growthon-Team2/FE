@@ -1,36 +1,24 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Danpung1 from "../image/danpung1.png";
+import Danpung2 from "../image/danpung2.png";
+import KakaoIcon from "../image/kakao_logo.png";
 
 function StartPage() {
     return (
         <StartPageWrapper>
             <StartPageImage>
-                <img
-                    src="src/image/tralalero_tralala.jpg"
-                    alt="tralalero"
-                    width="239"
-                    height="239"
-                />
+                <Danpung1Img src={Danpung1} alt="danpung1" />
             </StartPageImage>
             <Logo>
-                <img
-                    src="src/image/tralalero_tralala.jpg"
-                    alt="tralalero"
-                    width="41"
-                    height="20"
-                />
+                <Danpung2Img src={Danpung2} alt="danpung2" />
             </Logo>
             <TitleBox>
                 <Title>믿고 나눌 수 있는 따뜻한 연결,</Title>
                 <Title>'같이잇다'와 함께 만들어가요</Title>
             </TitleBox>
             <LoginButton to="/role">
-                <img
-                    src="src/image/kakao_logo.png"
-                    alt="kakao"
-                    width="40"
-                    height="40"
-                />
+                <KakaoImg src={KakaoIcon} alt="kakao" />
                 <span>카카오로 시작하기</span>
             </LoginButton>
         </StartPageWrapper>
@@ -44,7 +32,8 @@ const StartPageWrapper = styled.div`
 const StartPageImage = styled.div`
     padding: 83px 61px;
     margin-top: 44px;
-`
+    text-align: center;
+`;
 
 const Logo = styled.div`
     padding: 0px 10px;
@@ -55,20 +44,36 @@ const TitleBox = styled.div`
 `;
 
 const Title = styled.h1`
-    font-size: 22px;
+    font-size: clamp(16px, 6vw, 22px);
     font-weight: 600;
 `;
 
 const LoginButton = styled(Link)`
     display: flex;
     align-items: center;
-    padding: 10px 105px;
+    justify-content: center;
+    padding: 10px 0px;
     margin-top: 18px;
     border-radius: 10px;
     background: #fddc3f;
     font-size: 16px;
     width: 100%;
-    white-space: nowrap;
+`;
+
+const Danpung1Img = styled.img`
+    width: clamp(100px, 40vw, 150px);
+`;
+
+const Danpung2Img = styled.img`
+    width: 41px;
+    height: 20px;
+    max-width: 100%;
+`;
+
+const KakaoImg = styled.img`
+    width: 40px;
+    height: 40px;
+    max-width: 100%;
 `;
 
 export default StartPage;

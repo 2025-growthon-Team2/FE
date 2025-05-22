@@ -1,6 +1,5 @@
 import * as H from "../css/HomeStyle";
 import { useState } from "react";
-import alarmIcon from "../image/header_alarm.png";
 import dropIcon from "../image/dropdown.png";
 import EducationApplyCard from "../components/EducationApplyCard";
 import RegionBottomSheet from "../components/RegionBottomSheet";
@@ -25,10 +24,6 @@ function Home() {
 
   return (
     <H.PageWrapper>
-      <H.Header>
-        <H.Logo>logo</H.Logo>
-        <H.Alarm src={alarmIcon}></H.Alarm>
-      </H.Header>
       <H.Welcome>{"유저님, 오늘도 좋은 배움이\n기다리고 있어요 :)"}</H.Welcome>
       <H.EduSearch>
         <H.SearchButton></H.SearchButton>

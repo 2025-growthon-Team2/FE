@@ -3,7 +3,7 @@ import styled from "styled-components";
 function GiverInfo({ userInfo }) {
     return (
         <GiverInfoWrapper>
-            {userInfo.age}세<span>∙</span>{userInfo.field} 분야 <span>|</span>{" "}
+            {userInfo.field} 분야 <span>|</span>{" "}
             <span>{userInfo.subfield}</span>
         </GiverInfoWrapper>
     );

@@ -1,21 +1,35 @@
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
+import BackIcon from "../image/back.png";
+import HeaderAlarm from "../image/header_alarm.png";
 
 const checkAvailBackBtn = (pathname) => {
-    return !(pathname === "/home" || pathname === '/matching' || pathname === '/alarm' ||pathname === "/mypage");
+    return !(
+        pathname === "/home" ||
+        pathname === "/matching" ||
+        pathname === "/alarm" ||
+        pathname === "/mypage"
+    );
 };
 
 const checkAvailPageName = (pathname) => {
-    if (pathname === "/mypage") return "프로필";
-    if (pathname === "/edu/apply") return "학습 신청";
-    if (pathname === "/edu/register") return "교육 정보 등록하기";
-    if (pathname === "/edu/upload/") return "교육 내용 업로드";
-    if (pathname === "/edu/matching/") return "신청자 목록";
-    return "";
+    const whiteList = [
+        {
+            path: "/mypage",
+            name: "프로필",
+        },
+        { path: "/edu/apply", name: "학습 신청" },
+        { path: "/edu/register", name: "교육 정보 등록하기" },
+        { path: "/edu/matching", name: "신청자 목록" },
+    ];
+    let name = "";
+    whiteList.map((item) => {
+        if (pathname.indexOf(item.path) !== -1) name = item.name;
+    });
+    return name;
 };
 
 const checkAvailLogo = (pathname) => {
-    console.log(pathname);
     return pathname === "/home";
 };
 
@@ -25,16 +39,11 @@ function Header({ moveBack }) {
     const pageName = checkAvailPageName(pathname);
     const isAvailLogo = checkAvailLogo(pathname);
     return (
-        <HeaderWrapper>
+        <HeaderWrapper pathname={pathname}>
             <HeaderDivider>
                 {isAvailBackBtn && (
                     <BackButton onClick={moveBack}>
-                        <img
-                            src="src/image/back.png"
-                            alt="back"
-                            width="10"
-                            height="20"
-                        />
+                        <BackImage src={BackIcon} alt="back" />
                     </BackButton>
                 )}
                 {isAvailLogo && <Logo>logo</Logo>}
@@ -44,12 +53,8 @@ function Header({ moveBack }) {
             <HeaderDivider>
                 {isAvailLogo && (
                     <Alarm>
-                        <img
-                            src="src/image/header_alarm.png"
-                            alt="alarm"
-                            width="24px"
-                            height="26px"
-                        />
+                        <HeaderAlarmImg src={HeaderAlarm} alt="alarm" />
+                        
                     </Alarm>
                 )}
             </HeaderDivider>
@@ -59,8 +64,11 @@ function Header({ moveBack }) {
 
 const HeaderWrapper = styled.header`
     display: flex;
-    height: 40px;
+    height: ${({ pathname }) => {
+        return pathname.indexOf("edu") !== -1 ? "64px" : "40px";
+    }};
     align-items: center;
+    margin-top: 10px;
     padding: 0 20px;
     width: 100%;
 `;
@@ -68,11 +76,13 @@ const HeaderWrapper = styled.header`
 const BackButton = styled.button`
     background: none;
     border: none;
+    margin-right: 28px;
 `;
 
 const PageName = styled.h1`
     font-size: 20px;
     font-weight: 500;
+    white-space: nowrap;
 `;
 
 const Logo = styled.div`
@@ -83,8 +93,8 @@ const Logo = styled.div`
 
 const HeaderDivider = styled.div`
     width: 33.33%;
+    display: flex;
     &:last-child {
-        display: flex;
         justify-content: flex-end;
     }
 `;
@@ -92,6 +102,16 @@ const HeaderDivider = styled.div`
 const Alarm = styled.div`
     width: 24px;
     height: 24px;
+`;
+
+const HeaderAlarmImg = styled.img`
+    width: 24px;
+    height: 26px;
+`
+
+const BackImage = styled.img`
+    width: 10px;
+    height: 20px;
 `;
 
 export default Header;
