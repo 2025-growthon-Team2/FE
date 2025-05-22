@@ -1,10 +1,17 @@
-import { Link } from "react-router-dom";
+import { useCallback } from "react";
 import styled from "styled-components";
 import Danpung1 from "../image/danpung1.png";
 import Danpung2 from "../image/danpung2.png";
 import KakaoIcon from "../image/kakao_logo.png";
 
 function StartPage() {
+    const MoveToKakao = useCallback(() => {
+        const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
+        const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
+        const kakao_login_url = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+        window.location.href = kakao_login_url;
+    }, []);
+
     return (
         <StartPageWrapper>
             <StartPageImage>
@@ -17,7 +24,7 @@ function StartPage() {
                 <Title>믿고 나눌 수 있는 따뜻한 연결,</Title>
                 <Title>'같이잇다'와 함께 만들어가요</Title>
             </TitleBox>
-            <LoginButton to="/role">
+            <LoginButton onClick={MoveToKakao}>
                 <KakaoImg src={KakaoIcon} alt="kakao" />
                 <span>카카오로 시작하기</span>
             </LoginButton>
@@ -48,10 +55,11 @@ const Title = styled.h1`
     font-weight: 600;
 `;
 
-const LoginButton = styled(Link)`
+const LoginButton = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
     padding: 10px 0px;
     margin-top: 18px;
     border-radius: 10px;

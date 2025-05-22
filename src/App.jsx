@@ -15,6 +15,7 @@ import Alarm from "./pages/Alarm";
 import MyPage from "./pages/MyPage";
 import EduRegister from "./pages/EduRegister";
 import NotFound from "./pages/NotFound";
+import Redirection from "./pages/Redirection";
 
 function App() {
     return (
@@ -22,6 +23,10 @@ function App() {
             <Wrapper>
                 <Routes>
                     <Route index element={<Start />} />
+                    <Route
+                        path="/api/auth/kakao/callback"
+                        element={<Redirection />}
+                    />
                     <Route element={<RoleSelection />}>
                         <Route path="role" element={<Role />} />
                         <Route
