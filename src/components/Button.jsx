@@ -4,7 +4,7 @@ function Button({ isDisabled, onClick, children }) {
     const boolString = isDisabled?.toString();
     return (
         <ButtonWrapper
-            isdisabled={boolString}
+            $isdisabled={boolString}
             onClick={() => {
                 if (boolString === "true") return;
                 onClick();
@@ -16,7 +16,7 @@ function Button({ isDisabled, onClick, children }) {
 
 const ButtonWrapper = styled.button`
     background: ${(props) =>
-        props.isdisabled === "true" ? "#D2D2D2" : "#D9B5FF"};
+        props.$isdisabled === "true" ? "#D2D2D2" : "#D9B5FF"};
     padding: 20px 166px;
     border: none;
     border-radius: 50px;
@@ -24,7 +24,7 @@ const ButtonWrapper = styled.button`
     position: fixed;
     bottom: 20px;
     cursor: ${(props) =>
-        props.isdisabled === "true" ? "not-allowed" : "pointer"};
+        props.$isdisabled === "true" ? "not-allowed" : "pointer"};
 `;
 
 export default Button;

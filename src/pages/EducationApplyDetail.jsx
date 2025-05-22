@@ -1,21 +1,10 @@
-import { useParams, useNavigate } from "react-router-dom";
 import * as D from "../css/EducationApplyDetailStyle";
-import back from "../image/back.png";
 
 function EducationDetail() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-
-  const handleBack = () => {
-    navigate(-1);
-  };
+  
 
   return (
     <D.PageWrapper>
-      <D.Header>
-        <D.Back src={back} onClick={handleBack}></D.Back>
-        <D.HeaderTitle>학습 신청</D.HeaderTitle>
-      </D.Header>
       <D.Tags>
         <D.Category>중, 고등학교 학습</D.Category>
         <D.Region>서울 광진구 군자동</D.Region>

@@ -4,18 +4,14 @@ import Name from "../components/Name";
 import GiverInfo from "../components/GiverInfo";
 import Detail from "../components/Detail";
 import EduRegisterBtn from "./EduRegisterBtn";
+import Bear from "../image/bear.png"
 
 function Profile({ userInfo, auth }) {
     const { pathname } = useLocation();
     return (
         <ProfileWrapper>
             <ProfileImage pathname={pathname} auth={auth}>
-                <img
-                    src="src/image/bear.png"
-                    alt="profileimage"
-                    width="140"
-                    height="140"
-                />
+                <BearImg src={Bear} alt="bear" />
             </ProfileImage>
             {auth !== "login" && (
                 <Name auth={auth} path={pathname.substring(1)}>
@@ -37,7 +33,7 @@ const ProfileImage = styled.div`
     width: 140px;
     height: 140px;
     border-radius: 50%;
-    background: #EAD9CA;
+    background: #ead9ca;
     margin-bottom: ${({ pathname, auth }) => {
         return pathname !== "/mypage"
             ? "6px"
@@ -46,6 +42,11 @@ const ProfileImage = styled.div`
             : "12px";
     }};
 `;
+
+const BearImg = styled.img`
+    width: 140px;
+    height: 140px;
+`
 
 const ProfileWrapper = styled.div`
     display: flex;
