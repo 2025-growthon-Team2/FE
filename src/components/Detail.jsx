@@ -15,9 +15,8 @@ function Detail({ userInfo, auth }) {
         convertObjToMap(
             auth === "giver"
                 ? {
-                      "학교 정보": userInfo.school.info,
                       ID: userInfo.id,
-                      "학교 메일": userInfo.school.email,
+                      "학교 메일": userInfo.email,
                   }
                 : {
                       이름: userInfo.name,
