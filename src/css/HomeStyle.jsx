@@ -24,8 +24,8 @@ export const Logo = styled.div`
 `;
 
 export const Alarm = styled.img`
-  height: 26px;
-  width: 24px;
+  height: 18px;
+  width: 17px;
 `;
 
 export const Welcome = styled.div`
