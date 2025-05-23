@@ -1,71 +1,74 @@
 import axios from "axios";
 import { validateAuthNumber, validateEmail } from "../utils/validate";
 import { getAccessToken } from "../utils/getAccessToken";
+import { getCookie } from "../utils/cookies";
 
 export async function requestAuthNumber(email) {
-    try {
-        if (!validateEmail(email)) return "validation";
-        const accessToken = getAccessToken();
-        const response = await axios.post(
-            `${import.meta.env.VITE_API_SERVER}api/auth/email`,
-            { email },
-            {
-                headers: {
-                    "Content-Type": "application/json", // axios 는 객체 전송 시 기본으로 JSON 헤더를 설정해주지만, 명시하셔도 됩니다.
-                    Authorization: `Bearer ${accessToken}`,
-                },
-                // 만약 쿠키 기반 인증이나 크로스사이트 요청이 필요하다면 아래 옵션을 추가하세요.
-                withCredentials: true,
-            }
-        );
-        return "success";
-    } catch (error) {
-        const status = error.response?.status;
-        if (status === 400) return "wrong";
-        return "failed";
-    }
+  try {
+    if (!validateEmail(email)) return "validation";
+    const accessToken = await getAccessToken();
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_SERVER}api/auth/email`,
+      { email },
+      {
+        headers: {
+          "Content-Type": "application/json", // axios 는 객체 전송 시 기본으로 JSON 헤더를 설정해주지만, 명시하셔도 됩니다.
+          Authorization: `Bearer ${accessToken}`,
+        },
+        // 만약 쿠키 기반 인증이나 크로스사이트 요청이 필요하다면 아래 옵션을 추가하세요.
+        withCredentials: true,
+      }
+    );
+    return "success";
+  } catch (error) {
+    const status = error.response?.status;
+    if (status === 400) return "wrong";
+    return "failed";
+  }
 }
 
 export async function checkAuthNumber(number) {
-    try {
-        if (!validateAuthNumber(number)) return "validation";
-        const accessToken = getAccessToken();
-        const response = await axios.post(
-            `${import.meta.env.VITE_API_SERVER}api/auth/email/verify`,
-            { number },
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${accessToken}`,
-                },
-                withCredentials: true,
-            }
-        );
-        return "success";
-    } catch (error) {
-        const status = error.response?.status;
-        if (status === 400) return "wrong";
-        if (status === 422) return "expired";
-        return "failed";
-    }
+  try {
+    if (!validateAuthNumber(number)) return "validation";
+    const accessToken = await getAccessToken();
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_SERVER}api/auth/email/verify`,
+      { number },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        withCredentials: true,
+      }
+    );
+    return "success";
+  } catch (error) {
+    const status = error.response?.status;
+    if (status === 400) return "wrong";
+    if (status === 422) return "expired";
+    return "failed";
+  }
 }
 
 export async function getUserInfoApiCall() {
-    try {
-        const accessToken = await getAccessToken();
-        const { data } = await axios.get(
-            `${import.meta.env.VITE_API_SERVER}api/user`,
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${accessToken}`,
-                },
-                withCredentials: true,
-            }
-        );
-        return data;
-    } catch (error) {
-        const status = error.response?.status;
-        // window.location.href=KAKAO_LOGIN_URL;
-    }
+  try {
+    const accessToken = await getAccessToken();
+    console.log(getCookie("accessToken"));
+    console.log(accessToken);
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_API_SERVER}api/user`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        withCredentials: true,
+      }
+    );
+    return data;
+  } catch (error) {
+    const status = error.response?.status;
+    // window.location.href=KAKAO_LOGIN_URL;
+  }
 }
