@@ -60,8 +60,8 @@ function EduRegister() {
 
             const flag = await registerEduForm(
                 titleRef.current.value,
-                selectedFields.join(","),
                 subtitleRef.current.value,
+                selectedFields.join(","),
                 contentRef.current.value,
                 placeRef.current.value,
                 fromDateISO

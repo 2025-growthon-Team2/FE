@@ -21,10 +21,7 @@ function App() {
             <Wrapper>
                 <Routes>
                     <Route index element={<Start />} />
-                    <Route
-                        element={
-                            <RoleSelection />
-                        }>
+                    <Route element={<RoleSelection />}>
                         <Route path="role" element={<Role />} />
                         <Route
                             path="email-verification"
@@ -35,10 +32,7 @@ function App() {
                             element={<VerificationSuccess />}
                         />
                     </Route>
-                    <Route
-                        element={
-                            <Main />
-                        }>
+                    <Route element={<Main />}>
                         <Route path="home" element={<Home />} />
                         <Route path="mypage" element={<MyPage />} />
                         <Route
