@@ -15,7 +15,7 @@ function History() {
     useEffect(() => {
         const fetchUserInfo = async () => {
             const posts = await getPosts();
-            setUserAppliedPosts(posts.appliedPosts);
+            setUserAppliedPosts(posts);
         };
         fetchUserInfo();
     }, [getPosts]);
@@ -23,7 +23,7 @@ function History() {
     console.log(userAppliedPosts);
 
     const edus =
-        userAppliedPosts?.map((edu) =>
+        userAppliedPosts?.appliedPosts?.map((edu) =>
             Array.from(convertObjToMap(edu).values())
         ) || [];
 
