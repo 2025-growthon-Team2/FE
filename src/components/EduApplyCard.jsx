@@ -8,7 +8,7 @@ function EduApplyCard({ edu }) {
             <EduTitle>{title}</EduTitle>
             <EduDetail>
                 <EduSubtitle>{subtitle}</EduSubtitle>
-                <EduIsdoing status={isdoing}>{isdoing}</EduIsdoing>
+                <EduIsdoing $status={isdoing}>{isdoing}</EduIsdoing>
             </EduDetail>
         </EduApplyCardWrapper>
     );
@@ -52,23 +52,23 @@ const EduIsdoing = styled.div`
     border-radius: 10px;
     padding: 2px 6px;
     font-size: 10px;
-    background-color: ${({ status }) => {
-        return status === "완료"
+    background-color: ${({ $status }) => {
+        return $status === "완료"
             ? "#C9ECFF"
-            : status === "진행 중"
+            : $status === "진행 중"
             ? "#DCFADB"
             : "#ECECEC";
     }};
-    color: ${({ status }) => {
-        return status === "완료"
+    color: ${({ $status }) => {
+        return $status === "완료"
             ? "#006CFA"
-            : status === "진행 중"
+            : $status === "진행 중"
             ? "#0AC100"
             : "#000000";
     }};
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export default EduApplyCard;

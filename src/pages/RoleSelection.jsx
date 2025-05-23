@@ -3,32 +3,32 @@ import { useLocation, useNavigate, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import ProgressBar from "../components/PrgressBar";
 import Header from "../components/Header";
-import { validateAuthNumber, validateEmail } from "../utils/validate";
-
-function requestAuthNumber(email) {
-    if (!validateEmail(email)) return "validation";
-    return "success";
-}
-
-function checkAuthNumber(number) {
-    if (!validateAuthNumber(number)) return "validation";
-    return "success";
-}
+import {
+    getUserInfoApiCall,
+    checkAuthNumber,
+    requestAuthNumber,
+} from "../api/api";
 
 function RoleSelection() {
     const navigate = useNavigate();
     const { pathname } = useLocation();
-    const userInfo = {
-        name: "종호",
-        age: 27,
-        field: "IT",
-        subfield: "네트워크",
-        id: "parkvudghk@naver.com",
-        school: {
-            info: "인하공업전문대학 컴퓨터정보공학과(심화) 1학년",
-            email: "ebebebe@itc.ac.kr",
-        },
-    };
+
+    const getUserInfo = useCallback(async () => {
+        const data = await getUserInfoApiCall();
+        return data;
+    }, []);
+
+    const [userInfo, setUserInfo] = useState(null);
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            const data = await getUserInfo();
+            setUserInfo(data);
+        };
+        fetchUserInfo();
+    }, [getUserInfo]);
+    console.log(userInfo);
+
     const auth = "login";
     const routes = ["/role", "/email-verification", "/verification-success"];
     const [step, setStep] = useState(routes.indexOf(pathname));
@@ -39,7 +39,7 @@ function RoleSelection() {
     const [check, setCheck] = useState("");
     const emailAuthRef = useRef(null);
 
-    const moveNextPage = useCallback(() => {
+    const moveNextPage = useCallback(async () => {
         if (step === routes.length - 1) {
             navigate("/home");
             return;
@@ -47,9 +47,12 @@ function RoleSelection() {
         if (step === 0) {
             localStorage.setItem("tempRole", tempRole);
         }
-        if (pathname === "/email-verification") {
+        if (tempRole === "giver" && pathname === "/email-verification") {
             if (!isRequestEmail) {
-                const flag = requestAuthNumber(emailAuthRef.current.value);
+                const flag = await requestAuthNumber(
+                    emailAuthRef.current.value
+                );
+                console.log(flag);
                 setCheck(flag);
                 if (flag === "success") {
                     setIsRequestEmail(true);
@@ -57,7 +60,7 @@ function RoleSelection() {
                 }
                 return;
             }
-            const flag = checkAuthNumber(emailAuthRef.current.value);
+            const flag = await checkAuthNumber(emailAuthRef.current.value);
             setCheck(flag);
             emailAuthRef.current.value = "";
             if (flag !== "success") return;

@@ -4,26 +4,34 @@ import Name from "../components/Name";
 import GiverInfo from "../components/GiverInfo";
 import Detail from "../components/Detail";
 import EduRegisterBtn from "./EduRegisterBtn";
-import Bear from "../image/bear.png"
+import Bear from "../image/bear.png";
 
 function Profile({ userInfo, auth }) {
     const { pathname } = useLocation();
     return (
         <ProfileWrapper>
-            <ProfileImage pathname={pathname} auth={auth}>
+            <ProfileImage $pathname={pathname} $auth={auth}>
                 <BearImg src={Bear} alt="bear" />
             </ProfileImage>
-            {auth !== "login" && (
-                <Name auth={auth} path={pathname.substring(1)}>
-                    {userInfo.name}
-                </Name>
-            )}
-            {auth === "giver" && pathname === "/mypage" && (
-                <GiverInfo userInfo={userInfo} />
-            )}
-            {auth === "login" && <Detail userInfo={userInfo} auth={auth} />}
-            {auth === "giver" && pathname === "/mypage" && (
-                <EduRegisterBtn>교육 정보 등록하기</EduRegisterBtn>
+            {userInfo ? (
+                <>
+                    {auth !== "login" && (
+                        <Name $auth={auth} $path={pathname.substring(1)}>
+                            {userInfo.nickname}
+                        </Name>
+                    )}
+                    {auth === "giver" && pathname === "/mypage" && (
+                        <GiverInfo userInfo={userInfo} />
+                    )}
+                    {auth === "login" && (
+                        <Detail userInfo={userInfo} auth={auth} />
+                    )}
+                    {auth === "giver" && pathname === "/mypage" && (
+                        <EduRegisterBtn>교육 정보 등록하기</EduRegisterBtn>
+                    )}
+                </>
+            ) : (
+                <LoadingText>로딩 중...</LoadingText>
             )}
         </ProfileWrapper>
     );
@@ -34,10 +42,10 @@ const ProfileImage = styled.div`
     height: 140px;
     border-radius: 50%;
     background: #ead9ca;
-    margin-bottom: ${({ pathname, auth }) => {
-        return pathname !== "/mypage"
+    margin-bottom: ${({ $pathname, $auth }) => {
+        return $pathname !== "/mypage"
             ? "6px"
-            : auth === "giver"
+            : $auth === "giver"
             ? "20px"
             : "12px";
     }};
@@ -46,7 +54,7 @@ const ProfileImage = styled.div`
 const BearImg = styled.img`
     width: 140px;
     height: 140px;
-`
+`;
 
 const ProfileWrapper = styled.div`
     display: flex;
@@ -54,6 +62,12 @@ const ProfileWrapper = styled.div`
     align-items: center;
     padding: 13px;
     border-bottom: 1px solid #ececec;
+`;
+
+const LoadingText = styled.div`
+    font-size: 16px;
+    color: #898989;
+    margin: 10px 0;
 `;
 
 export default Profile;

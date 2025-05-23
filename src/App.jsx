@@ -13,47 +13,62 @@ import MatchingList from "./pages/MatchingList";
 import MyPage from "./pages/MyPage";
 import EduRegister from "./pages/EduRegister";
 import NotFound from "./pages/NotFound";
+import Redirection from "./pages/Redirection";
 
 function App() {
-  return (
-    <AppContainer>
-      <Wrapper>
-        <Routes>
-          <Route index element={<Start />} />
-          <Route element={<RoleSelection />}>
-            <Route path="role" element={<Role />} />
-            <Route path="email-verification" element={<EmailVerification />} />
-            <Route
-              path="verification-success"
-              element={<VerificationSuccess />}
-            />
-          </Route>
-          <Route element={<Main />}>
-            <Route path="home" element={<Home />} />
-            <Route path="mypage" element={<MyPage />} />
-            <Route path="edu/apply/:id" element={<EducationApplyDetail />} />
+    return (
+        <AppContainer>
+            <Wrapper>
+                <Routes>
+                    <Route index element={<Start />} />
+                    <Route
+                        path="/api/auth/kakao/callback"
+                        element={<Redirection />}
+                    />
+                    <Route element={<RoleSelection />}>
+                        <Route path="role" element={<Role />} />
+                        <Route
+                            path="email-verification"
+                            element={<EmailVerification />}
+                        />
+                        <Route
+                            path="verification-success"
+                            element={<VerificationSuccess />}
+                        />
+                    </Route>
+                    <Route element={<Main />}>
+                        <Route path="home" element={<Home />} />
 
-            <Route path="edu/matching/:id" element={<MatchingList />} />
-            <Route path="edu/register" element={<EduRegister />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Wrapper>
-    </AppContainer>
-  );
+                        <Route path="mypage" element={<MyPage />} />
+                        <Route
+                            path="edu/apply/:id"
+                            element={<EducationApplyDetail />}
+                        />
+
+                        <Route
+                            path="edu/matching/:id"
+                            element={<MatchingList />}
+                        />
+                        <Route path="edu/register" element={<EduRegister />} />
+                    </Route>
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </Wrapper>
+        </AppContainer>
+    );
 }
 
 const AppContainer = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
 `;
 
 const Wrapper = styled.div`
-  width: 393px;
-  position: relative;
-  height: 100%;
+    width: 393px;
+    position: relative;
+    height: 100%;
 `;
 
 export default App;
