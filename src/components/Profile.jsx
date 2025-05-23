@@ -4,14 +4,13 @@ import Name from "../components/Name";
 import GiverInfo from "../components/GiverInfo";
 import Detail from "../components/Detail";
 import EduRegisterBtn from "./EduRegisterBtn";
-import Bear from "../image/bear.png";
 
 function Profile({ userInfo, auth }) {
     const { pathname } = useLocation();
     return (
         <ProfileWrapper>
             <ProfileImage $pathname={pathname} $auth={auth}>
-                <BearImg src={Bear} alt="bear" />
+                <Img src={userInfo?.profileimage} alt="profile" />
             </ProfileImage>
             {userInfo ? (
                 <>
@@ -23,9 +22,7 @@ function Profile({ userInfo, auth }) {
                     {auth === "giver" && pathname === "/mypage" && (
                         <GiverInfo userInfo={userInfo} />
                     )}
-                    {auth === "" && (
-                        <Detail userInfo={userInfo} auth={auth} />
-                    )}
+                    {auth === "" && <Detail userInfo={userInfo} auth={auth} />}
                     {auth === "giver" && pathname === "/mypage" && (
                         <EduRegisterBtn>교육 정보 등록하기</EduRegisterBtn>
                     )}
@@ -40,8 +37,6 @@ function Profile({ userInfo, auth }) {
 const ProfileImage = styled.div`
     width: 140px;
     height: 140px;
-    border-radius: 50%;
-    background: #ead9ca;
     margin-bottom: ${({ $pathname, $auth }) => {
         return $pathname !== "/mypage"
             ? "6px"
@@ -51,9 +46,10 @@ const ProfileImage = styled.div`
     }};
 `;
 
-const BearImg = styled.img`
+const Img = styled.img`
     width: 140px;
     height: 140px;
+    border-radius: 50%;
 `;
 
 const ProfileWrapper = styled.div`

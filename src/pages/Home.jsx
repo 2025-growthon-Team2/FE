@@ -9,7 +9,6 @@ import { useOutletContext } from "react-router-dom";
 import EduInfoCard from "../components/EduInfoCard";
 
 function Home() {
-    // 교육 게시물 불러오기
     const [edus, setEdus] = useState([]);
 
     const fetchEdusData = useCallback(async () => {

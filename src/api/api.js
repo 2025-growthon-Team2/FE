@@ -130,3 +130,28 @@ export async function registerEduForm(
         return "failed";
     }
 }
+
+
+// export async function updateRole(role) {
+//     try {
+//         const accessToken = await getAccessToken();
+//         const response2 = await axios.post(
+//             `${import.meta.env.VITE_API_SERVER}api/role/my`,
+//             { role },
+//             {
+//                 headers: {
+//                     "Content-Type": "application/json",
+//                     Authorization: `Bearer ${accessToken}`,
+//                 },
+//                 withCredentials: true,
+//             }
+//         );
+//         return "success";
+//     } catch (error) {
+//         console.log(error.response);
+//         const status = error.response?.status;
+//         if (status === 400) return "wrong";
+//         if (status === 422) return "expired";
+//         return "failed";
+//     }
+// }
