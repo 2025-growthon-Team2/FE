@@ -16,7 +16,6 @@ function EmailVerification() {
     const [inputValue, setInputValue] = useState("");
 
     useEffect(() => {
-        // LocalStorage에서 역할 정보 가져오기
         const savedRole = localStorage.getItem("tempRole");
         setTempRole(savedRole);
 

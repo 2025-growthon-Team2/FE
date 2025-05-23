@@ -21,7 +21,8 @@ function MainPage() {
         };
         fetchUserInfo();
     }, [getUserInfo]);
-    const auth = "learner";
+    const auth = "giver";
+    console.log(userInfo);
     return (
         <MainPageWrapper>
             <Header moveBack={handleBack} />

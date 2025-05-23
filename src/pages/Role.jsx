@@ -4,12 +4,13 @@ import Profile from "../components/Profile";
 import TempRoleSelection from "../components/TempRoleSelection";
 
 function Role() {
-    const { moveNextPage, selectTempRole, tempRole, userInfo, auth } = useOutletContext();
+    const { moveNextPage, selectTempRole, tempRole, userInfo } =
+        useOutletContext();
     return (
         <>
-            <Profile userInfo={userInfo} auth={auth} />
+            <Profile userInfo={userInfo} auth={userInfo?.role} />
             <TempRoleSelection onClick={selectTempRole} />
-            <Button isDisabled={tempRole === ''} onClick={moveNextPage} >
+            <Button isDisabled={tempRole === ""} onClick={moveNextPage}>
                 확인
             </Button>
         </>

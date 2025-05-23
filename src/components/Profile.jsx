@@ -15,7 +15,7 @@ function Profile({ userInfo, auth }) {
             </ProfileImage>
             {userInfo ? (
                 <>
-                    {auth !== "login" && (
+                    {auth !== "" && (
                         <Name $auth={auth} $path={pathname.substring(1)}>
                             {userInfo.nickname}
                         </Name>
@@ -23,7 +23,7 @@ function Profile({ userInfo, auth }) {
                     {auth === "giver" && pathname === "/mypage" && (
                         <GiverInfo userInfo={userInfo} />
                     )}
-                    {auth === "login" && (
+                    {auth === "" && (
                         <Detail userInfo={userInfo} auth={auth} />
                     )}
                     {auth === "giver" && pathname === "/mypage" && (
