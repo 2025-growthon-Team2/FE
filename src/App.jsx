@@ -14,7 +14,6 @@ import MyPage from "./pages/MyPage";
 import EduRegister from "./pages/EduRegister";
 import NotFound from "./pages/NotFound";
 import Redirection from "./pages/Redirection";
-import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
     return (
@@ -23,14 +22,8 @@ function App() {
                 <Routes>
                     <Route index element={<Start />} />
                     <Route
-                        path="/api/auth/kakao/callback"
-                        element={<Redirection />}
-                    />
-                    <Route
                         element={
-                            <ProtectedRoute>
-                                <RoleSelection />
-                            </ProtectedRoute>
+                            <RoleSelection />
                         }>
                         <Route path="role" element={<Role />} />
                         <Route
@@ -44,9 +37,7 @@ function App() {
                     </Route>
                     <Route
                         element={
-                            <ProtectedRoute>
-                                <Main />
-                            </ProtectedRoute>
+                            <Main />
                         }>
                         <Route path="home" element={<Home />} />
                         <Route path="mypage" element={<MyPage />} />
