@@ -1,12 +1,92 @@
 import styled from "styled-components";
 import userImg from "../image/userImg.png";
 import { useNavigate } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import axios from "axios";
 
-function EducationApplyCard({ id }) {
+function EducationApplyCard({
+  id,
+  writerId,
+  title,
+  subTitle,
+  category,
+  teachAt,
+  createdAt,
+}) {
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(`/edu/apply/${id}`);
+  };
+
+  // 재능기부자 이름 불러오기
+  const [writerName, setWriterName] = useState("");
+
+  const fetchWriterInfo = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `https://gachitda.corexaen.com/api/user/${writerId}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (response.status === 200 && response.data.nickname) {
+        console.log("재능 기부자 정보:", response.data);
+        setWriterName(response.data.nickname);
+      } else {
+        console.warn("예상치 못한 응답 형식입니다:", response.data);
+      }
+    } catch (error) {
+      console.error("재능기부자 정보 불러오는 중 오류 발생:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchWriterInfo();
+  }, [fetchWriterInfo]);
+
+  // 교육 날짜 format
+  const formatTeachAt = (isoString) => {
+    const date = new Date(isoString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // 0-indexed
+    const day = date.getDate();
+
+    const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
+    const dayOfWeek = weekDays[date.getDay()];
+
+    let hours = date.getHours();
+    const ampm = hours >= 12 ? "오후" : "오전";
+    hours = hours % 12 || 12;
+
+    return `${year}년 ${month}월 ${day}일(${dayOfWeek}) ${ampm} ${hours}시`;
+  };
+
+  // 날짜 비교 로직
+  const formatAgo = (isoString) => {
+    const createdDate = new Date(isoString);
+    const today = new Date();
+
+    const created = new Date(
+      createdDate.getFullYear(),
+      createdDate.getMonth(),
+      createdDate.getDate()
+    );
+    const now = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
+
+    const diffTime = now - created;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) {
+      return "오늘";
+    } else {
+      return `${diffDays}일 전`;
+    }
   };
 
   return (
@@ -16,17 +96,15 @@ function EducationApplyCard({ id }) {
       </EduProfile>
       <EduDes>
         <EduTop>
-          <EduTag>코딩</EduTag>
-          <EduAgo>6일 전</EduAgo>
+          <EduTag>{category}</EduTag>
+          <EduAgo>{formatAgo(createdAt)}</EduAgo>
         </EduTop>
         <EduMid>
-          <EduTitle>처음 배우는 코딩 - 파이썬 기초</EduTitle>
-          <EduSubtitle>
-            {"파이썬의 설치부터 간단한 프로그램 만들어보기까지:)"}
-          </EduSubtitle>
-          <EduDonator>이민수</EduDonator>
+          <EduTitle>{title}</EduTitle>
+          <EduSubtitle>{subTitle}</EduSubtitle>
+          <EduDonator>{writerName}</EduDonator>
         </EduMid>
-        <EduBottom>{"2025년 6월 10일(화) 오후 5시 이후"}</EduBottom>
+        <EduBottom>{formatTeachAt(teachAt)}</EduBottom>
       </EduDes>
     </EduBox>
   );
