@@ -26,7 +26,7 @@ function EmailAuth({ emailAuthRef, isRequestEmail }) {
             {title}
             <Input
                 ref={emailAuthRef}
-                isRequestEmail={isRequestEmail}
+                $isrequestemail={isRequestEmail.toString()}
                 placeholder={!isRequestEmail ? "example_1234@.com" : ""}
             />
         </EmailAuthWrapper>
@@ -48,8 +48,8 @@ const Input = styled.input`
     padding: 8px 0px;
     width: 100%;
     margin-top: 24px;
-    font-size: ${({ isRequestEmail }) => {
-        return isRequestEmail ? "24px" : "16px";
+    font-size: ${({ $isrequestemail }) => {
+        return $isrequestemail === 'true' ? "24px" : "16px";
     }};16px;
     outline: none;
     caret-color: #c48dff;

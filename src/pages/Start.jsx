@@ -3,13 +3,11 @@ import styled from "styled-components";
 import Danpung1 from "../image/danpung1.png";
 import Danpung2 from "../image/danpung2.png";
 import KakaoIcon from "../image/kakao_logo.png";
+import { KAKAO_LOGIN_URL } from "../utils/globals";
 
 function StartPage() {
     const MoveToKakao = useCallback(() => {
-        const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
-        const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
-        const kakao_login_url = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-        window.location.href = kakao_login_url;
+        window.location.href = KAKAO_LOGIN_URL;
     }, []);
 
     return (

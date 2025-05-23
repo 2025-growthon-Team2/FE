@@ -1,42 +1,39 @@
-import { useState } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
+import { getUserInfoApiCall } from "../api/api";
 
 function MainPage() {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const userInfo = {
-    name: "종호",
-    field: "IT",
-    subfield: "네트워크",
-    id: "parkvudghk@naver.com",
-    email: "ebebebe@itc.ac.kr",
-  };
-  const auth = "giver";
-  const [currentPage, setCurrentPage] = useState(
-    location.pathname.substring(1)
-  );
-  const changeCurrentPage = (page) => {
-    setCurrentPage(page);
-  };
-
-  const handleBack = () => {
-    navigate(-1);
-  };
-
-  return (
-    <MainPageWrapper>
-      <Header moveBack={handleBack} />
-      <Outlet context={{ userInfo, auth }} />
-    </MainPageWrapper>
-  );
+    const navigate = useNavigate();
+    const handleBack = () => {
+        navigate(-1);
+    };
+    const getUserInfo = useCallback(async () => {
+        const data = await getUserInfoApiCall();
+        return data;
+    }, []);
+    const [userInfo, setUserInfo] = useState(null);
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            const data = await getUserInfo();
+            setUserInfo(data);
+        };
+        fetchUserInfo();
+    }, [getUserInfo]);
+    const auth = "learner";
+    return (
+        <MainPageWrapper>
+            <Header moveBack={handleBack} />
+            <Outlet context={{ userInfo, auth }} />
+        </MainPageWrapper>
+    );
 }
 
 const MainPageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 export default MainPage;
