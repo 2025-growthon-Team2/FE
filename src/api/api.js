@@ -131,6 +131,26 @@ export async function registerEduForm(
     }
 }
 
+export async function logout() {
+    try {
+        const accessToken = await getAccessToken();
+        const response = await axios.post(
+            `${import.meta.env.VITE_API_SERVER}logout`,
+            {
+                headers: {
+                    "Content-Type": "application/json", // axios 는 객체 전송 시 기본으로 JSON 헤더를 설정해주지만, 명시하셔도 됩니다.
+                    Authorization: `Bearer ${accessToken}`,
+                },
+                // 만약 쿠키 기반 인증이나 크로스사이트 요청이 필요하다면 아래 옵션을 추가하세요.
+                withCredentials: true,
+            }
+        );
+        return "success";
+    } catch(error) {
+        console.log(error);
+        return "failed";
+    }
+}
 
 // export async function updateRole(role) {
 //     try {
