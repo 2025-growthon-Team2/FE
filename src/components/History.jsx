@@ -20,12 +20,10 @@ function History() {
         fetchUserInfo();
     }, [getPosts]);
 
-    console.log(userAppliedPosts);
+    console.log(userAppliedPosts?.appliedPosts);
 
     const edus =
-        userAppliedPosts?.appliedPosts?.map((edu) =>
-            Array.from(convertObjToMap(edu).values())
-        ) || [];
+        userAppliedPosts?.appliedPosts || [];
 
     return (
         <HistoryWrapper>

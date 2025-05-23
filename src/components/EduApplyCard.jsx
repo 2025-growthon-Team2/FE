@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 function EduApplyCard({ edu }) {
-    const [name, title, subtitle, isdoing] = edu;
+    console.log(edu);
     return (
         <EduApplyCardWrapper>
-            <GiverName>{name}</GiverName>
-            <EduTitle>{title}</EduTitle>
+            <GiverName>{edu.postId}</GiverName>
+            <EduTitle>{edu.title}</EduTitle>
             <EduDetail>
-                <EduSubtitle>{subtitle}</EduSubtitle>
-                <EduIsdoing $status={isdoing}>{isdoing}</EduIsdoing>
+                <EduSubtitle>{edu.subtitle}</EduSubtitle>
+                <EduIsdoing $status={edu.status}>{edu.status}</EduIsdoing>
             </EduDetail>
         </EduApplyCardWrapper>
     );

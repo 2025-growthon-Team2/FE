@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import styled from "styled-components";
-import Danpung1 from "../image/danpung1.png";
-import Danpung2 from "../image/danpung2.png";
+import MainLogo from "../image/mainlogo.png";
+import SubLogo from "../image/headerLogo.png";
 import KakaoIcon from "../image/kakao_logo.png";
 import { KAKAO_LOGIN_URL } from "../utils/globals";
 
@@ -13,10 +13,10 @@ function StartPage() {
     return (
         <StartPageWrapper>
             <StartPageImage>
-                <Danpung1Img src={Danpung1} alt="danpung1" />
+                <MainLogoImg src={MainLogo} alt="Gachitda" />
             </StartPageImage>
             <Logo>
-                <Danpung2Img src={Danpung2} alt="danpung2" />
+                <SubLogoImg src={SubLogo} alt="Gachitda" />
             </Logo>
             <TitleBox>
                 <Title>믿고 나눌 수 있는 따뜻한 연결,</Title>
@@ -66,14 +66,12 @@ const LoginButton = styled.button`
     width: 100%;
 `;
 
-const Danpung1Img = styled.img`
+const MainLogoImg = styled.img`
     width: clamp(100px, 40vw, 150px);
 `;
 
-const Danpung2Img = styled.img`
-    width: 41px;
+const SubLogoImg = styled.img`
     height: 20px;
-    max-width: 100%;
 `;
 
 const KakaoImg = styled.img`

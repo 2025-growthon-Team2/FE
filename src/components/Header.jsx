@@ -6,10 +6,7 @@ import HeaderLogo from "../image/headerLogo.png";
 
 const checkAvailBackBtn = (pathname) => {
   return !(
-    pathname === "/home" ||
-    pathname === "/matching" ||
-    pathname === "/alarm" ||
-    pathname === "/mypage"
+    pathname === "/home"
   );
 };
 
