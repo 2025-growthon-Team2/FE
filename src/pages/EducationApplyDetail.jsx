@@ -52,7 +52,6 @@ function EducationDetail() {
   };
 
   // 신청하기
-
   const fetchEduApply = useCallback(async () => {
     try {
       const accessToken = await getAccessToken();
