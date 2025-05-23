@@ -15,12 +15,12 @@ function Detail({ userInfo, auth }) {
         convertObjToMap(
             auth === "giver"
                 ? {
-                      ID: userInfo?.id,
+                      ID: userInfo?.kakaomail,
                       "학교 메일": userInfo?.email,
                   }
                 : {
                       이름: userInfo?.nickname,
-                      "카카오 ID": userInfo?.id,
+                      "카카오 ID": userInfo?.kakaomail,
                   }
         ).entries()
     );

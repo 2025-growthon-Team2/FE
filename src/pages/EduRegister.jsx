@@ -3,6 +3,7 @@ import EduRegisterFields from "../components/EduRegisterFields";
 import Button from "../components/Button";
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { registerEduForm } from "../api/api";
 
 const checkActivate = (
     selectedFields,
@@ -50,9 +51,22 @@ function EduRegister() {
         [selectedFields, setSelectedFields]
     );
 
-    const submitEduInfo = useCallback(() => {
-        navigate("/home");
-    }, []);
+    const submitEduInfo = useCallback(async () => {
+        try {
+            const flag = await registerEduForm(
+                titleRef.current.value,
+                selectedFields.join(","),
+                subtitleRef.current.value,
+                contentRef.current.value,
+                placeRef.current.value,
+                fromDateRef.current.value
+            );
+            if (flag === "failed") alert("등록 실패!");
+            navigate("/home");
+        } catch (error) {
+            console.log(error);
+        }
+    }, [navigate, selectedFields]);
 
     useEffect(() => {
         const checkAvail = () => {
@@ -131,8 +145,9 @@ function EduRegister() {
             </EduRegisterFormDiv>
             <EduRegisterFormDiv>
                 <h4>교육 기간</h4>
-                <EduRegisterInput ref={fromDateRef} type="date" />
-                <EduRegisterInput ref={toDateRef} type="date" />
+                <EduRegisterInput ref={fromDateRef} type="datetime-local" />
+                <FromTo> ~ </FromTo>
+                <EduRegisterInput ref={toDateRef} type="datetime-local" />
             </EduRegisterFormDiv>
             <EduRegisterFormDiv>
                 <h4>교육 장소</h4>
@@ -179,6 +194,15 @@ const EduRegisterInput = styled.input`
         white-space: normal;
         box-sizing: border-box;
     }
+
+    &[type="datetime-local"] {
+        color: #8e8e8e;
+        padding: 8px 12px;
+        &::-webkit-calendar-picker-indicator {
+            margin-left: 0;
+            padding: 0;
+        }
+    }
 `;
 
 const EduRegisterTextarea = styled.textarea`
@@ -191,6 +215,11 @@ const EduRegisterTextarea = styled.textarea`
     resize: none;
     outline: none;
     caret-color: #c48dff;
+`;
+
+const FromTo = styled.span`
+    color: #8e8e8e;
+    font-size: 14px;
 `;
 
 export default EduRegister;

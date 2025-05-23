@@ -21,7 +21,7 @@ function MainPage() {
         };
         fetchUserInfo();
     }, [getUserInfo]);
-    const auth = "learner";
+    const auth = userInfo?.role;
     return (
         <MainPageWrapper>
             <Header moveBack={handleBack} />

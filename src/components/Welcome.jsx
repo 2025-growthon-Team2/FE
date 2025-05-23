@@ -3,7 +3,7 @@ import styled from "styled-components";
 function Welcome({userInfo}) {
 	return <WelcomeWrapper>
 		<Success>검증 완료!</Success>
-		<Hello>{userInfo.nickname} 님 반가워요:&#41;</Hello>
+		<Hello>{userInfo?.nickname} 님 반가워요:&#41;</Hello>
 	</WelcomeWrapper>
 }
 

@@ -27,11 +27,19 @@ function RoleSelection() {
         };
         fetchUserInfo();
     }, [getUserInfo]);
-    console.log(userInfo);
 
-    const auth = "login";
     const routes = ["/role", "/email-verification", "/verification-success"];
-    const [step, setStep] = useState(routes.indexOf(pathname));
+    const [step, setStep] = useState(() => {
+        // 초기 step 값을 localStorage에서 가져온 정보를 기반으로 설정
+        if (pathname === "/verification-success") {
+            return 2;
+        } else if (pathname === "/email-verification") {
+            return 1;
+        } else {
+            return 0;
+        }
+    });
+
     const [tempRole, setTempRole] = useState(
         localStorage.getItem("tempRole") || ""
     );
@@ -40,12 +48,21 @@ function RoleSelection() {
     const emailAuthRef = useRef(null);
 
     const moveNextPage = useCallback(async () => {
-        if (step === routes.length - 1) {
+        // 마지막 단계(verification-success)에서 확인 버튼 클릭 시 /home으로 이동
+        if (pathname === "/verification-success") {
             navigate("/home");
             return;
         }
+
         if (step === 0) {
             localStorage.setItem("tempRole", tempRole);
+            // 신청자(learner) 선택 시 이메일 인증 없이 바로 검증완료 페이지로 이동
+            if (tempRole === "learner") {
+                localStorage.setItem("isEmailVerified", "true");
+                setStep(2);
+                navigate("/verification-success");
+                return;
+            }
         }
         if (tempRole === "giver" && pathname === "/email-verification") {
             if (!isRequestEmail) {
@@ -60,10 +77,16 @@ function RoleSelection() {
                 }
                 return;
             }
-            const flag = await checkAuthNumber(emailAuthRef.current.value);
+            const flag = await checkAuthNumber(
+                emailAuthRef.current.value,
+                tempRole
+            );
             setCheck(flag);
             emailAuthRef.current.value = "";
             if (flag !== "success") return;
+
+            // 이메일 인증 성공 시 플래그 설정
+            localStorage.setItem("isEmailVerified", "true");
         }
         setStep(step + 1);
         navigate(routes[step + 1]);
@@ -112,7 +135,6 @@ function RoleSelection() {
                     step,
                     setStep,
                     userInfo,
-                    auth,
                     emailAuthRef,
                     moveNextPage,
                     movePrevPage,

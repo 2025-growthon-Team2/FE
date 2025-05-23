@@ -14,6 +14,7 @@ import MyPage from "./pages/MyPage";
 import EduRegister from "./pages/EduRegister";
 import NotFound from "./pages/NotFound";
 import Redirection from "./pages/Redirection";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
     return (
@@ -25,7 +26,12 @@ function App() {
                         path="/api/auth/kakao/callback"
                         element={<Redirection />}
                     />
-                    <Route element={<RoleSelection />}>
+                    <Route
+                        element={
+                            <ProtectedRoute>
+                                <RoleSelection />
+                            </ProtectedRoute>
+                        }>
                         <Route path="role" element={<Role />} />
                         <Route
                             path="email-verification"
@@ -36,15 +42,18 @@ function App() {
                             element={<VerificationSuccess />}
                         />
                     </Route>
-                    <Route element={<Main />}>
+                    <Route
+                        element={
+                            <ProtectedRoute>
+                                <Main />
+                            </ProtectedRoute>
+                        }>
                         <Route path="home" element={<Home />} />
-
                         <Route path="mypage" element={<MyPage />} />
                         <Route
                             path="edu/apply/:id"
                             element={<EducationApplyDetail />}
                         />
-
                         <Route
                             path="edu/matching/:id"
                             element={<MatchingList />}
