@@ -53,13 +53,18 @@ function EduRegister() {
 
     const submitEduInfo = useCallback(async () => {
         try {
+            // datetime-local 입력값을 Date 객체로 변환
+            const fromDate = new Date(fromDateRef.current.value);
+            // ISO 8601 형식으로 변환
+            const fromDateISO = fromDate.toISOString();
+
             const flag = await registerEduForm(
                 titleRef.current.value,
                 selectedFields.join(","),
                 subtitleRef.current.value,
                 contentRef.current.value,
                 placeRef.current.value,
-                fromDateRef.current.value
+                fromDateISO
             );
             if (flag === "failed") alert("등록 실패!");
             navigate("/home");
