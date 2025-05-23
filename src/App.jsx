@@ -13,7 +13,6 @@ import MatchingList from "./pages/MatchingList";
 import MyPage from "./pages/MyPage";
 import EduRegister from "./pages/EduRegister";
 import NotFound from "./pages/NotFound";
-import Redirection from "./pages/Redirection";
 
 function App() {
     return (
