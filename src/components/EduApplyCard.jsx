@@ -4,7 +4,7 @@ function EduApplyCard({ edu }) {
     console.log(edu);
     return (
         <EduApplyCardWrapper>
-            <GiverName>{edu.postId}</GiverName>
+            <GiverName>{edu.writerName}</GiverName>
             <EduTitle>{edu.title}</EduTitle>
             <EduDetail>
                 <EduSubtitle>{edu.subtitle}</EduSubtitle>
