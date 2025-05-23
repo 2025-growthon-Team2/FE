@@ -21,8 +21,7 @@ function MainPage() {
         };
         fetchUserInfo();
     }, [getUserInfo]);
-    const auth = "giver";
-    console.log(userInfo);
+    const auth = userInfo?.role;
     return (
         <MainPageWrapper>
             <Header moveBack={handleBack} />

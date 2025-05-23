@@ -1,17 +1,16 @@
 import styled from "styled-components";
 
-function GiverInfo({ userInfo }) {
+function GiverInfo() {
     return (
         <GiverInfoWrapper>
-            {userInfo.field} 분야 <span>|</span>{" "}
-            <span>{userInfo.subfield}</span>
+            교육 분야 <span>|</span> <span>코딩</span>
         </GiverInfoWrapper>
     );
 }
 
 const GiverInfoWrapper = styled.span`
-	margin-bottom: 14px;
-	font-weight: 500;
+    margin-bottom: 14px;
+    font-weight: 500;
     span {
         color: #989898;
     }

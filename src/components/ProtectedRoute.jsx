@@ -20,7 +20,6 @@ function ProtectedRoute({ children }) {
                 }
 
                 const userInfo = await getUserInfoApiCall();
-                console.log("UserInfo in ProtectedRoute:", userInfo);
 
                 // RoleSelection 관련 페이지들
                 const roleSelectionPaths = [
